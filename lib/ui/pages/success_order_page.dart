@@ -7,10 +7,10 @@ class SuccessOrderPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: IllustrationPage(
           title: "You've Made Order",
-          subtitle: "Just stay at home while we are\npreparing your best foods",
+          subtitle: "Just stay at home while we are\npreparing your best plants",
           picturePath: 'assets/bike.png',
           buttonTap1: () {},
-          buttonTitle1: 'Order Other Foods',
+          buttonTitle1: 'Order Other Plants',
           buttonTap2: () {},
           buttonTitle2: 'View My Order',
         ));

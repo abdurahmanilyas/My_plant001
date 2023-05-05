@@ -17,7 +17,7 @@ class OrderListItem extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                  image: NetworkImage(transaction.food.picturePath),
+                  image: NetworkImage(transaction.plant.picturePath),
                   fit: BoxFit.cover)),
         ),
         SizedBox(
@@ -26,7 +26,7 @@ class OrderListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                transaction.food.name,
+                transaction.plant.name,
                 style: blackFontStyle2,
                 maxLines: 1,
                 overflow: TextOverflow.clip,

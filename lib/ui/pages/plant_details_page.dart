@@ -1,16 +1,16 @@
 part of 'pages.dart';
 
-class FoodDetailsPage extends StatefulWidget {
+class PlantDetailsPage extends StatefulWidget {
   final Function onBackButtonPressed;
   final Transaction transaction;
 
-  const FoodDetailsPage({super.key, required this.onBackButtonPressed, required this.transaction});
+  const PlantDetailsPage({super.key, required this.onBackButtonPressed, required this.transaction});
 
   @override
-  _FoodDetailsPageState createState() => _FoodDetailsPageState();
+  _PlantDetailsPageState createState() => _PlantDetailsPageState();
 }
 
-class _FoodDetailsPageState extends State<FoodDetailsPage> {
+class _PlantDetailsPageState extends State<PlantDetailsPage> {
   int quantity = 1;
 
   @override
@@ -31,7 +31,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(widget.transaction.food.picturePath),
+                    image: NetworkImage(widget.transaction.plant.picturePath),
                     fit: BoxFit.cover)),
           )),
           SafeArea(
@@ -85,14 +85,14 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                   width: MediaQuery.of(context).size.width -
                                       134, // 32 + 102
                                   child: Text(
-                                    widget.transaction.food.name,
+                                    widget.transaction.plant.name,
                                     style: blackFontStyle2,
                                   ),
                                 ),
                                 SizedBox(
                                   height: 6,
                                 ),
-                                RatingStars(widget.transaction.food.rate)
+                                RatingStars(widget.transaction.plant.rate)
                               ],
                             ),
                             Row(
@@ -146,7 +146,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 14, 0, 16),
                           child: Text(
-                            widget.transaction.food.description,
+                            widget.transaction.plant.description,
                             style: greyFontStyle,
                           ),
                         ),
@@ -157,7 +157,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 4, 0, 41),
                           child: Text(
-                            widget.transaction.food.ingredients,
+                            widget.transaction.plant.ingredients,
                             style: greyFontStyle,
                           ),
                         ),
@@ -177,7 +177,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                           symbol: 'IDR ',
                                           decimalDigits: 0)
                                       .format(quantity *
-                                          widget.transaction.food.price),
+                                          widget.transaction.plant.price),
                                   style: blackFontStyle2.copyWith(fontSize: 18),
                                 )
                               ],

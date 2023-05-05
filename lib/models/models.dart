@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-part 'food.dart';
+part 'plant.dart';
 part 'transaction.dart';
 part 'user.dart';

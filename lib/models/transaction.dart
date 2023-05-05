@@ -4,7 +4,7 @@ enum TransactionStatus { delivered, on_delivery, pending, cancelled }
 
 class Transaction extends Equatable {
   final int id;
-  final Food food;
+  final Plant plant;
   final int quantity;
   final int total;
   final DateTime dateTime;
@@ -13,7 +13,7 @@ class Transaction extends Equatable {
 
   const Transaction(
       {required this.id,
-      required this.food,
+      required this.plant,
       required this.quantity,
       required this.total,
       required this.dateTime,
@@ -22,7 +22,7 @@ class Transaction extends Equatable {
 
   Transaction copyWith(
       {required int id,
-      required Food food,
+      required Plant plant,
       required int quantity,
       required int total,
       required DateTime dateTime,
@@ -30,7 +30,7 @@ class Transaction extends Equatable {
       required User user}) {
     return Transaction(
         id: id ?? this.id,
-        food: food ?? this.food,
+        plant: plant ?? this.plant,
         quantity: quantity ?? this.quantity,
         total: total ?? this.total,
         dateTime: dateTime ?? this.dateTime,
@@ -39,31 +39,31 @@ class Transaction extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, food, quantity, total, dateTime, status, user];
+  List<Object> get props => [id, plant, quantity, total, dateTime, status, user];
 }
 
 List<Transaction> mockTransactions = [
   Transaction(
       id: 1,
-      food: mockFoods[1],
+      plant: mockPlants[1],
       quantity: 10,
-      total: (mockFoods[1].price * 10 * 1.1).round() + 50000,
+      total: (mockPlants[1].price * 10 * 1.1).round() + 50000,
       dateTime: DateTime.now(),
       status: TransactionStatus.on_delivery,
       user: mockUser),
   Transaction(
       id: 2,
-      food: mockFoods[2],
+      plant: mockPlants[2],
       quantity: 7,
-      total: (mockFoods[2].price * 7 * 1.1).round() + 50000,
+      total: (mockPlants[2].price * 7 * 1.1).round() + 50000,
       dateTime: DateTime.now(),
       status: TransactionStatus.delivered,
       user: mockUser),
   Transaction(
       id: 3,
-      food: mockFoods[3],
+      plant: mockPlants[3],
       quantity: 5,
-      total: (mockFoods[3].price * 5 * 1.1).round() + 50000,
+      total: (mockPlants[3].price * 5 * 1.1).round() + 50000,
       dateTime: DateTime.now(),
       status: TransactionStatus.cancelled,
       user: mockUser)

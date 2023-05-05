@@ -1,11 +1,11 @@
 part of 'pages.dart';
 
-class FoodPage extends StatefulWidget {
+class PlantPage extends StatefulWidget {
   @override
-  _FoodPageState createState() => _FoodPageState();
+  _PlantPageState createState() => _PlantPageState();
 }
 
-class _FoodPageState extends State<FoodPage> {
+class _PlantPageState extends State<PlantPage> {
   int selectedIndex = 0;
 
   @override
@@ -31,11 +31,11 @@ class _FoodPageState extends State<FoodPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Food Market',
+                        'Plant Market',
                         style: blackFontStyle1,
                       ),
                       Text(
-                        "Let's get some foods",
+                        "Let's get some plants",
                         style:
                             greyFontStyle.copyWith(fontWeight: FontWeight.w300),
                       ),
@@ -54,7 +54,7 @@ class _FoodPageState extends State<FoodPage> {
                 ],
               ),
             ),
-            //// LIST OF FOOD
+            //// LIST OF PLANT
             Container(
               height: 258,
               width: double.infinity,
@@ -62,21 +62,21 @@ class _FoodPageState extends State<FoodPage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   Row(
-                    children: mockFoods
+                    children: mockPlants
                         .map((e) => Padding(
                               padding: EdgeInsets.only(
-                                  left: (e == mockFoods.first)
+                                  left: (e == mockPlants.first)
                                       ? defaultMargin
                                       : 0,
                                   right: defaultMargin),
-                              child: FoodCard(e),
+                              child: PlantCard(e),
                             ))
                         .toList(),
                   )
                 ],
               ),
             ),
-            //// LIST OF FOOD (TABS)
+            //// LIST OF PLANT (TABS)
             Container(
               width: double.infinity,
               color: Colors.white,
@@ -95,17 +95,17 @@ class _FoodPageState extends State<FoodPage> {
                     height: 16,
                   ),
                   Builder(builder: (_) {
-                    List<Food> foods = (selectedIndex == 0)
-                        ? mockFoods
+                    List<Plant> plants = (selectedIndex == 0)
+                        ? mockPlants
                         : (selectedIndex == 1) ? [] : [];
 
                     return Column(
-                      children: foods
+                      children: plants
                           .map((e) => Padding(
                                 padding: EdgeInsets.fromLTRB(
                                     defaultMargin, 0, defaultMargin, 16),
-                                child: FoodListItem(
-                                    food: e, itemWidth: listItemWidth),
+                                child: PlantListItem(
+                                    plant: e, itemWidth: listItemWidth),
                               ))
                           .toList(),
                     );

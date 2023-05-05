@@ -23,10 +23,10 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
     if (inProgress.length == 0 && past.length == 0) {
       return IllustrationPage(
         title: 'Ouch! Hungry',
-        subtitle: 'Seems you like have not\nordered any food yet',
+        subtitle: 'Seems you like have not\nordered any plant yet',
         picturePath: 'assets/love_burger.png',
         buttonTap1: () {},
-        buttonTitle1: 'Find Foods', buttonTap2: () {}, buttonTitle2: 'Find Foods',
+        buttonTitle1: 'Find Plants', buttonTap2: () {}, buttonTitle2: 'Find Plants',
       );
     } else {
       double listItemWidth =
