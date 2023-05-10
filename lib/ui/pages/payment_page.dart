@@ -43,7 +43,7 @@ class PaymentPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
                                   image: NetworkImage(
-                                      transaction.food.picturePath),
+                                      transaction.plant.picturePath),
                                   fit: BoxFit.cover)),
                         ),
                         Column(
@@ -56,7 +56,7 @@ class PaymentPage extends StatelessWidget {
                               // 12 (jarak picture ke title)+
                               // 78 (lebar jumlah items),
                               child: Text(
-                                transaction.food.name,
+                                transaction.plant.name,
                                 style: blackFontStyle2,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
@@ -67,7 +67,7 @@ class PaymentPage extends StatelessWidget {
                                       locale: 'id-ID',
                                       symbol: 'IDR ',
                                       decimalDigits: 0)
-                                  .format(transaction.food.price),
+                                  .format(transaction.plant.price),
                               style: greyFontStyle.copyWith(fontSize: 13),
                             )
                           ],
@@ -96,7 +96,7 @@ class PaymentPage extends StatelessWidget {
                             defaultMargin -
                             5,
                         child: Text(
-                          transaction.food.name,
+                          transaction.plant.name,
                           style: greyFontStyle,
                         )),
                     SizedBox(
@@ -109,7 +109,7 @@ class PaymentPage extends StatelessWidget {
                                   symbol: 'IDR ',
                                   decimalDigits: 0)
                               .format(transaction.quantity *
-                                  transaction.food.price),
+                                  transaction.plant.price),
                           style: blackFontStyle3,
                           textAlign: TextAlign.right,
                         ))
@@ -170,7 +170,7 @@ class PaymentPage extends StatelessWidget {
                                   symbol: 'IDR ',
                                   decimalDigits: 0)
                               .format(transaction.quantity *
-                                  transaction.food.price *
+                                  transaction.plant.price *
                                   0.1),
                           style: blackFontStyle3,
                           textAlign: TextAlign.right,
@@ -201,7 +201,7 @@ class PaymentPage extends StatelessWidget {
                                   locale: 'id-ID',
                                   symbol: 'IDR ',
                                   decimalDigits: 0)
-                              .format(transaction.food.price *
+                              .format(transaction.plant.price *
                                       transaction.quantity *
                                       1.1 +
                                   50000),
