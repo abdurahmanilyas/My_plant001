@@ -1,5 +1,7 @@
 part of 'models.dart';
 
+enum PlantType { new_plant, popular, recommended }
+
 class Plant extends Equatable {
   final int id;
   final String picturePath;
@@ -8,6 +10,7 @@ class Plant extends Equatable {
   final String ingredients;
   final int price;
   final double rate;
+  final List<PlantType> types;
 
   const Plant(
       {required this.id,
@@ -16,7 +19,8 @@ class Plant extends Equatable {
       required this.description,
       required this.ingredients,
       required this.price,
-      required this.rate});
+      required this.rate,
+      required this.types = const []});
 
   @override
   List<Object> get props =>
@@ -33,7 +37,8 @@ List<Plant> mockPlants = [
           "Sate Sayur Sultan adalah menu sate vegan paling terkenal di Bandung. Sate ini dibuat dari berbagai macam bahan bermutu tinggi. Semua bahan ditanam dengan menggunakan teknologi masa kini sehingga memiliki nutrisi yang kaya.",
       ingredients: "Bawang Merah, Paprika, Bawang Bombay, Timun",
       price: 150000,
-      rate: 4.2),
+      rate: 4.2,
+      types: [PlantType.new_plant, PlantType.recommended, PlantType.popular]),
   Plant(
       id: 2,
       picturePath:
@@ -53,7 +58,8 @@ List<Plant> mockPlants = [
           "Salad ala mexico yang kaya akan serat dan vitamin. Seluruh bahan diambil dari Mexico sehingga akan memiliki cita rasa yang original.",
       ingredients: "Jagung, Selada, Tomat Ceri, Keju, Wortel",
       price: 105900,
-      rate: 3.9),
+      rate: 3.9,
+      types: [PlantType.new_plant]),
   Plant(
       id: 4,
       picturePath:
@@ -63,7 +69,8 @@ List<Plant> mockPlants = [
           "Sup wortel pedas yang unik ini cocok banget buat kalian-kalian yang suka pedas namun ingin tetap sehat. Rasanya yang unik akan memanjakan lidah Anda.",
       ingredients: "Wortel, Seledri, Kacang Tanah, Labu, Garam, Gula",
       price: 60000,
-      rate: 4.9),
+      rate: 4.9,
+      types: [PlantType.recommended]),
   Plant(
       id: 5,
       picturePath:
