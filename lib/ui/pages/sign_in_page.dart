@@ -114,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      primary: greyColor,
+                      primary: greenBlueColor,
                     ),
                     child: Text(
                       'Create New Account',

@@ -65,22 +65,22 @@ class IllustrationPage extends StatelessWidget {
           (buttonTap2 == null)
               ? SizedBox()
               : SizedBox(
-            width: 200,
-            height: 45,
-            child: ElevatedButton(
-              onPressed: () => buttonTap1(),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF8D92A3),
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(
-                buttonTitle2 ?? 'title',
-                style: blackFontStyle3.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  width: 200,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: () => buttonTap1(),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF8D92A3),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      buttonTitle2 ?? 'title',
+                      style: blackFontStyle3.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                 ),
               ),
             ),

@@ -3,7 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:my_plant1/ui/pages/pages.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: SignInPage(),
     );
   }
 }
-

@@ -39,6 +39,9 @@ dependencies:
   intl: ^0.18.1
   material_design_icons_flutter: ^6.0.7096
   supercharged: ^2.1.1
+  http: ^0.13.6
+  image_picker: ^0.8.7+5
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_lints: ^2.0.0

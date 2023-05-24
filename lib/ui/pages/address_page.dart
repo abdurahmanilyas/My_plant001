@@ -6,12 +6,22 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController houseNumController = TextEditingController();
+  bool isLoading = false;
+  late List<String> cities;
+  late String selectedCity;
+
+  @override
+  void initState() {
+    super.initState();
+    cities = ['Bandung', 'Jakarta', 'Surabaya'];
+    selectedCity = cities[0];
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
-    TextEditingController houseNumController = TextEditingController();
-
     return GeneralPage(
       title: 'Address',
       subtitle: "Make sure it's valid",
@@ -105,26 +115,22 @@ class _AddressPageState extends State<AddressPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: DropdownButton(
+                value: selectedCity,
                 isExpanded: true,
                 underline: SizedBox(),
-                items: [
-                  DropdownMenuItem(
-                      child: Text(
-                    'Bandung',
-                    style: blackFontStyle3,
-                  )),
-                  DropdownMenuItem(
-                      child: Text(
-                    'Jakarta',
-                    style: blackFontStyle3,
-                  )),
-                  DropdownMenuItem(
-                      child: Text(
-                    'Surabaya',
-                    style: blackFontStyle3,
-                  ))
-                ],
-                onChanged: (item) {}),
+                items: cities
+                    .map((e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: blackFontStyle3,
+                    )))
+                    .toList(),
+                onChanged: (item) {
+                  setState(() {
+                    selectedCity = item!;
+                  });
+                }),
           ),
           Container(
             width: double.infinity,

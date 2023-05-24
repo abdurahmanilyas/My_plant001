@@ -1,7 +1,8 @@
 part of 'shared.dart';
 
 Color mainColor = "00B860".toColor();
-Color greyColor = "137576".toColor();
+Color greyColor = "8D92A3".toColor();
+Color greenBlueColor = "137576".toColor();
 
 TextStyle greyFontStyle = GoogleFonts.poppins().copyWith(color: greyColor);
 TextStyle blackFontStyle1 = GoogleFonts.poppins()
