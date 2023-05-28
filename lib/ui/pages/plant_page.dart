@@ -58,22 +58,51 @@ class _PlantPageState extends State<PlantPage> {
             Container(
               height: 258,
               width: double.infinity,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Row(
-                    children: mockPlants
-                        .map((e) => Padding(
-                              padding: EdgeInsets.only(
-                                  left: (e == mockPlants.first)
-                                      ? defaultMargin
-                                      : 0,
-                                  right: defaultMargin),
-                              child: PlantCard(e),
-                            ))
-                        .toList(),
-                  )
-                ],
+              child: BlocBuilder<PlantCubit, PlantState>(
+                builder: (_, state) => (state is PlantLoaded)
+                    ? ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Row(
+                            children: state.plants
+                                .map((e) => Padding(
+                                      padding: EdgeInsets.only(
+                                          left: (e == mockPlants.first)
+                                              ? defaultMargin
+                                              : 0,
+                                          right: defaultMargin),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Get.to(PlantDetailsPage(
+                                              transaction: Transaction(
+                                                plant: e,
+                                                user: (context
+                                                        .read<UserCubit>()
+                                                        .state as UserLoaded)
+                                                    .user,
+                                                id: 1,
+                                                quantity: 99,
+                                                dateTime: DateTime.now(),
+                                                status: TransactionStatus
+                                                    .on_delivery,
+                                                total: (mockPlants[1].price *
+                                                            10 *
+                                                            1.1)
+                                                        .round() +
+                                                    50000,
+                                              ),
+                                              onBackButtonPressed: () {
+                                                Get.back();
+                                              },
+                                            ));
+                                          },
+                                          child: PlantCard(e)),
+                                    ))
+                                .toList(),
+                          )
+                        ],
+                      )
+                    : Center(child: loadingIndicator),
               ),
             ),
             //// LIST OF PLANT (TABS)
@@ -94,21 +123,32 @@ class _PlantPageState extends State<PlantPage> {
                   SizedBox(
                     height: 16,
                   ),
-                  Builder(builder: (_) {
-                    List<Plant> plants = (selectedIndex == 0)
-                        ? mockPlants
-                        : (selectedIndex == 1) ? [] : [];
+                  BlocBuilder<PlantCubit, PlantState>(builder: (_, state) {
+                    if (state is PlantLoaded) {
+                      List<Plant> foods = state.plants
+                          .where((element) =>
+                              element.types.contains((selectedIndex == 0)
+                                  ? PlantType.newPlant
+                                  : (selectedIndex == 1)
+                                      ? PlantType.popular
+                                      : PlantType.recommended))
+                          .toList();
 
-                    return Column(
-                      children: plants
-                          .map((e) => Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    defaultMargin, 0, defaultMargin, 16),
-                                child: PlantListItem(
-                                    plant: e, itemWidth: listItemWidth),
-                              ))
-                          .toList(),
-                    );
+                      return Column(
+                        children: foods
+                            .map((e) => Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      defaultMargin, 0, defaultMargin, 16),
+                                  child: PlantListItem(
+                                      plant: e, itemWidth: listItemWidth),
+                                ))
+                            .toList(),
+                      );
+                    } else {
+                      return Center(
+                        child: loadingIndicator,
+                      );
+                    }
                   }),
                 ],
               ),

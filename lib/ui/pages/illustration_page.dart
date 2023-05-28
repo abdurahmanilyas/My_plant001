@@ -68,23 +68,23 @@ class IllustrationPage extends StatelessWidget {
                   width: 200,
                   height: 45,
                   child: ElevatedButton(
-                    onPressed: () => buttonTap1(),
+                    onPressed: () => buttonTap2(),
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFF8D92A3),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: Text(
                       buttonTitle2 ?? 'title',
                       style: blackFontStyle3.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
         ],
       ),
     );

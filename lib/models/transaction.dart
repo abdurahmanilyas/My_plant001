@@ -11,7 +11,7 @@ class Transaction extends Equatable {
   final TransactionStatus status;
   final User user;
 
-  const Transaction(
+  Transaction(
       {required this.id,
       required this.plant,
       required this.quantity,
@@ -20,26 +20,29 @@ class Transaction extends Equatable {
       required this.status,
       required this.user});
 
-  Transaction copyWith(
-      {required int id,
-      required Plant plant,
-      required int quantity,
-      required int total,
-      required DateTime dateTime,
-      required TransactionStatus status,
-      required User user}) {
+  Transaction copyWith({
+    int? id,
+    Plant? plant,
+    int? quantity,
+    int? total,
+    DateTime? dateTime,
+    User? user,
+    TransactionStatus? status,
+  }) {
     return Transaction(
-        id: id ?? this.id,
-        plant: plant ?? this.plant,
-        quantity: quantity ?? this.quantity,
-        total: total ?? this.total,
-        dateTime: dateTime ?? this.dateTime,
-        status: status ?? this.status,
-        user: user ?? this.user);
+      id: id ?? this.id,
+      plant: plant ?? this.plant,
+      quantity: quantity ?? this.quantity,
+      total: total ?? this.total,
+      dateTime: dateTime ?? this.dateTime,
+      user: user ?? this.user,
+      status: status ?? this.status,
+    );
   }
 
   @override
-  List<Object> get props => [id, plant, quantity, total, dateTime, status, user];
+  List<Object> get props =>
+      [id, plant, quantity, total, dateTime, status, user];
 }
 
 List<Transaction> mockTransactions = [

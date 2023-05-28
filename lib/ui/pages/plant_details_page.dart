@@ -4,7 +4,10 @@ class PlantDetailsPage extends StatefulWidget {
   final Function onBackButtonPressed;
   final Transaction transaction;
 
-  const PlantDetailsPage({super.key, required this.onBackButtonPressed, required this.transaction});
+  const PlantDetailsPage(
+      {super.key,
+      required this.onBackButtonPressed,
+      required this.transaction});
 
   @override
   _PlantDetailsPageState createState() => _PlantDetailsPageState();
@@ -186,12 +189,20 @@ class _PlantDetailsPageState extends State<PlantDetailsPage> {
                               width: 163,
                               height: 45,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(PaymentPage(
+                                    transaction: widget.transaction.copyWith(
+                                        quantity: quantity,
+                                        total: quantity *
+                                            widget.transaction.plant.price),
+                                  ));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   primary: mainColor,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),),
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
                                 child: Text(
                                   'Order Now',
                                   style: blackFontStyle3.copyWith(
