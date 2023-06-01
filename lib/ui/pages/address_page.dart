@@ -1,6 +1,11 @@
 part of 'pages.dart';
 
 class AddressPage extends StatefulWidget {
+  final User user;
+  final String password;
+  final File pictureFile;
+
+  AddressPage(this.user, this.password, this.pictureFile);
   @override
   _AddressPageState createState() => _AddressPageState();
 }
@@ -137,14 +142,58 @@ class _AddressPageState extends State<AddressPage> {
             margin: EdgeInsets.only(top: 24),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-                primary: mainColor,
-              ),
+            child: (isLoading == true)
+                ? Center(
+              child: loadingIndicator,
+            )
+                : RaisedButton(
+              onPressed: () async {
+                User user = widget.user.copyWith(
+                    phoneNumber: phoneController.text,
+                    address: addressController.text,
+                    houseNumber: houseNumController.text,
+                    city: selectedCity);
+
+                setState(() {
+                  isLoading = true;
+                });
+
+                await context.bloc<UserCubit>().signUp(
+                    user, widget.password,
+                    pictureFile: widget.pictureFile);
+
+                UserState state = context.bloc<UserCubit>().state;
+
+                if (state is UserLoaded) {
+                  context.bloc<FoodCubit>().getFoods();
+                  context.bloc<TransactionCubit>().getTransactions();
+                  Get.to(MainPage());
+                } else {
+                  Get.snackbar("", "",
+                      backgroundColor: "D9435E".toColor(),
+                      icon: Icon(
+                        MdiIcons.closeCircleOutline,
+                        color: Colors.white,
+                      ),
+                      titleText: Text(
+                        "Sign In Failed",
+                        style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      messageText: Text(
+                        (state as UserLoadingFailed).message,
+                        style: GoogleFonts.poppins(color: Colors.white),
+                      ));
+                  setState(() {
+                    isLoading = false;
+                  });
+                }
+              },
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              color: mainColor,
               child: Text(
                 'Sign Up Now',
                 style: GoogleFonts.poppins(
