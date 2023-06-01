@@ -26,7 +26,11 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
           double listItemWidth =
               MediaQuery.of(context).size.width - 2 * defaultMargin;
 
-          return ListView(
+          return RefreshIndicator(
+            onRefresh: () async {
+              await context.bloc<TransactionCubit>().getTransactions();
+            },
+            child: ListView(
             children: [
               Column(
                 children: [
@@ -95,9 +99,17 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                                           right: defaultMargin,
                                           left: defaultMargin,
                                           bottom: 16),
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          if (e.status ==
+                                              TransactionStatus.pending) {
+                                            await launch(e.paymentUrl);
+                                          }
+                                        },
                                       child: OrderListItem(
                                           transaction: e,
                                           itemWidth: listItemWidth),
+                                      ),
                                     ))
                                 .toList(),
                           );

@@ -15,6 +15,7 @@ import 'package:my_plant1/ui/widgets/widgets.dart';
 import 'package:supercharged/supercharged.dart';
 import 'dart:async';
 import 'package:my_plant1/cubit/cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'general_page.dart';
 part 'sign_in_page.dart';
@@ -30,3 +31,4 @@ part 'success_sign_up_page.dart';
 part 'order_history_page.dart';
 part 'profile_page.dart';
 part 'splash_screen.dart';
+part 'payment_method_page.dart';

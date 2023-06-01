@@ -67,7 +67,7 @@ class _PlantPageState extends State<PlantPage> {
                             children: state.plants
                                 .map((e) => Padding(
                                       padding: EdgeInsets.only(
-                                          left: (e == mockPlants.first)
+                                          left: (e == state.plants.first)
                                               ? defaultMargin
                                               : 0,
                                           right: defaultMargin),

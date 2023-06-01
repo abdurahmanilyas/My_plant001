@@ -1,19 +1,58 @@
 part of 'services.dart';
 
 class TransactionServices {
-  static Future<ApiReturnValue<List<Transaction>>> getTransactions() async {
-    await Future.delayed(Duration(seconds: 3));
+  static Future<ApiReturnValue<List<Transaction>>> getTransactions(
+      {required http.Client client}) async {
+    client ??= http.Client();
 
-    return ApiReturnValue(value: mockTransactions, message: '');
+    String url = baseURL + 'transaction/?limit=1000';
+
+    var response = await client.get(url as Uri, headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${User.token}"
+    });
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'Please try again', value: []);
+    }
+
+    var data = jsonDecode(response.body);
+
+    List<Transaction> transactions = (data['data']['data'] as Iterable)
+        .map((e) => Transaction.fromJson(e))
+        .toList();
+
+    return ApiReturnValue(value: transactions, message: '');
   }
 
   static Future<ApiReturnValue<Transaction>> submitTransaction(
-      Transaction transaction) async {
-    await Future.delayed(Duration(seconds: 2));
+      Transaction transaction,
+      {required http.Client client}) async {
+    client ??= http.Client();
 
-    // return ApiReturnValue(message: "Transaksi Gagal");
-    return ApiReturnValue(
-        value: transaction.copyWith(id: 123, status: TransactionStatus.pending),
-        message: '');
+    String url = baseURL + 'checkout';
+
+    var response = await client.post(url as Uri,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${User.token}"
+        },
+        body: jsonEncode(<String, dynamic>{
+          'plant_id': transaction.plant.id,
+          'user_id': transaction.user.id,
+          "quantity": transaction.quantity,
+          "total": transaction.total,
+          "status": "PENDING"
+        }));
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'Please try again', value: null);
+    }
+
+    var data = jsonDecode(response.body);
+
+    Transaction value = Transaction.fromJson(data['data']);
+
+    return ApiReturnValue(value: value, message: '');
   }
 }

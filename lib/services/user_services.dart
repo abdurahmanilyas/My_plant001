@@ -1,11 +1,29 @@
 part of 'services.dart';
 
 class UserServices {
-  static Future<ApiReturnValue<User>> signIn(
-      String email, String password) async {
-    await Future.delayed(Duration(milliseconds: 500));
+  static Future<ApiReturnValue<User>> signIn(String email, String password,
+      {required http.Client client}) async {
+    if (client == null) {
+      client = http.Client();
+    }
 
-    return ApiReturnValue(value: mockUser, message: '');
+    String url = baseURL + 'login';
+
+    var response = await client.post(url as Uri,
+        headers: {"Content-Type": "application/json"},
+        body:
+        jsonEncode(<String, String>{'email': email, 'password': password}));
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'Please try again', value: null);
+    }
+
+    var data = jsonDecode(response.body);
+
+    User.token = data['data']['access_token'];
+    User value = User.fromJson(data['data']['user']);
+
+    return ApiReturnValue(value: value, message: '');
   }
 
   static Future<ApiReturnValue<User>> signUp(User user, String password,
@@ -30,7 +48,7 @@ class UserServices {
         }));
 
     if (response.statusCode != 200) {
-      return ApiReturnValue(message: 'Please try again');
+      return ApiReturnValue(message: 'Please try again', value: null);
     }
 
     var data = jsonDecode(response.body);
@@ -39,16 +57,16 @@ class UserServices {
     User value = User.fromJson(data['data']['user']);
 
     if (pictureFile != null) {
-      ApiReturnValue<String> result = await uploadProfilePicture(pictureFile);
+      ApiReturnValue<String> result = await uploadProfilePicture(pictureFile, request: null);
       if (result.value != null) {
         value = value.copyWith(
             picturePath:
-            "http://plantapp.test/storage/" +
-                result.value);
+            "http://foodmarket-backend.buildwithangga.id/storage/" +
+                result.value, id: null, name: '', email: '', address: '', houseNumber: '', phoneNumber: '', city: '');
       }
     }
 
-    return ApiReturnValue(value: value);
+    return ApiReturnValue(value: value, message: '');
   }
 
   static Future<ApiReturnValue<String>> uploadProfilePicture(File pictureFile,
@@ -74,10 +92,9 @@ class UserServices {
 
       String imagePath = data['data'][0];
 
-      return ApiReturnValue(value: imagePath);
+      return ApiReturnValue(value: imagePath, message: '');
     } else {
-      return ApiReturnValue(message: 'Uploading Profile Picture Failed');
+      return ApiReturnValue(message: 'Uploading Profile Picture Failed', value: '');
     }
   }
-
 }
